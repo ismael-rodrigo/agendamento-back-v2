@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException ,status
 from src.core.auth.auth_utils import user_logged
 from src.core.auth.hash_provider import verify_password
-from src.core.auth.token_provider import create_access_token, refresh_token
+from src.utils.token_provider import tokenManager
 from src.core.schemas.token_schemas import LoginToken, RefreshToken
 from src.core.database.database import db
 from src.core.schemas.user_schema import User
@@ -22,7 +22,7 @@ def get_token(credentials:LoginToken):
     if not verify_password(credentials.password ,user['password']):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED ,detail='password or username invalid')
     
-    token = create_access_token({'sub':str(user['_id'])})
+    token = tokenManager.create_token(user , 'username')
     return token
 
 
@@ -36,7 +36,7 @@ def verify(user:User = Depends(user_logged)):
 @router.post('/refresh')
 def refresh(refresh :RefreshToken):
     try:
-        access = refresh_token(refresh.refresh)
+        access = tokenManager.refresh_token(refresh.refresh)
     except JWTError:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED , detail='invalid refresh token')
 

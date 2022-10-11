@@ -1,7 +1,7 @@
 from fastapi.middleware.cors import CORSMiddleware
-from .routes import user_route , auth_route
-from .settings import settings
-
+from src.core.routes import user_route , auth_route
+from src.settings import settings
+from src.schedule.routes import public_user_route
 
 from fastapi import FastAPI
 
@@ -19,3 +19,5 @@ app.add_middleware(
 
 app.include_router(user_route.router ,prefix='')
 app.include_router(auth_route.router  ,prefix='/auth')
+
+app.include_router(public_user_route.router , prefix='/schedule')

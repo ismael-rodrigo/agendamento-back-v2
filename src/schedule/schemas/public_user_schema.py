@@ -12,4 +12,11 @@ class PublicUser(BaseModel):
     available_user:bool
     
 
+class LoginPublicUserRequest(BaseModel):
+    cpf_user:str
+    birth_date:str
+
+class LoginPublicUserResponse(BaseModel):
+    user_infos:PublicUser
+    token:str
 

@@ -9,9 +9,13 @@ fastapi application model with pre-configured authentication routes and user mod
 
 ## INSTALL API
 
-  git clone https://github.com/ismael-rodrigo/learning-fast-api.git
+- git clone https://github.com/ismael-rodrigo/learning-fast-api.git
 
-  pip install -r requirements.txt
+- pip install poetry
 
-## RUN API
-  python run.py
+- poetry install
+
+## Run (DEV mode)
+- poetry run dev
+
+

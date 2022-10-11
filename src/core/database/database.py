@@ -1,5 +1,5 @@
 import pymongo
-from src.core.settings import settings
+from src.settings import settings
 
 
 
