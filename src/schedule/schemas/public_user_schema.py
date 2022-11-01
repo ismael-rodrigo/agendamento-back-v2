@@ -1,3 +1,4 @@
+from typing import Literal
 from pydantic import BaseModel
 
 
@@ -8,6 +9,8 @@ class PublicUser(BaseModel):
     fullname:str
     mother_name:str
     phone_number:str
+    
+    status: Literal[ 'created' , 'infos_seted']
 
     available_user:bool
     
